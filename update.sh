@@ -22,3 +22,5 @@ git push origin main
 
 cd ..
 rm -rf output crunchy-credentials-offsets
+
+exit 0
