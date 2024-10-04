@@ -1,9 +1,9 @@
 #!/bin/bash
 
-wget "https://apkpure.com/crunchyroll/com.crunchyroll.crunchyroid/versions" --user-agent="Mozilla/5.0 (X11; Linux i686; rv:130.0) Gecko/20100101 Firefox/130.0" -O crunchyroll-versions.html
+https_proxy=$PROXY_URL wget "https://apkpure.com/crunchyroll/com.crunchyroll.crunchyroid/versions" --user-agent="Mozilla/5.0 (X11; Linux i686; rv:130.0) Gecko/20100101 Firefox/130.0" -O crunchyroll-versions.html
 rg "data-dt-versioncode=\"([0-9]{3,4})\"" crunchyroll-versions.html -o -I -N -r \$1 > version-codes.txt
 cut -d: -f 2 version-codes.txt | sort -n | tail -n 1 > latest-version-code.txt
-wget "https://d.apkpure.com/b/APK/com.crunchyroll.crunchyroid?versionCode=$(cat latest-version-code.txt)" --user-agent="Mozilla/5.0 (X11; Linux i686; rv:130.0) Gecko/20100101 Firefox/130.0" -O crunchyroll.apk
+https_proxy=$PROXY_URL wget "https://d.apkpure.com/b/APK/com.crunchyroll.crunchyroid?versionCode=$(cat latest-version-code.txt)" --user-agent="Mozilla/5.0 (X11; Linux i686; rv:130.0) Gecko/20100101 Firefox/130.0" -O crunchyroll.apk
 rm -f version-codes.txt latest-version-code.txt crunchyroll-versions.html
 apktool d -f crunchyroll.apk
 rm -rf output
