@@ -2,7 +2,7 @@ FROM registry.fedoraproject.org/fedora:40
 
 RUN dnf install -y gh git unzip java-11-openjdk
 
-RUN mkdir /ripgrep-install && cd /ripgrep-install && curl "https://github.com/BurntSushi/ripgrep/releases/download/14.1.1/ripgrep-14.1.1-x86_64-unknown-linux-musl.tar.gz" -o /ripgrep-install/ripgrep.tar.gz && tar -xzf /ripgrep-install/ripgrep.tar.gz && mv /ripgrep-install/ripgrep-*/rg /usr/local/bin/rg && chmod +x /usr/local/bin/rg && cd / && rm -rf /ripgrep-install
+RUN mkdir /ripgrep-install && cd /ripgrep-install && curl -L "https://github.com/BurntSushi/ripgrep/releases/download/14.1.1/ripgrep-14.1.1-x86_64-unknown-linux-musl.tar.gz" -o /ripgrep-install/ripgrep.tar.gz && tar -xzf /ripgrep-install/ripgrep.tar.gz && mv /ripgrep-install/ripgrep-*/rg /usr/local/bin/rg && chmod +x /usr/local/bin/rg && cd / && rm -rf /ripgrep-install
 
 RUN curl https://raw.githubusercontent.com/iBotPeaches/Apktool/master/scripts/linux/apktool -o /usr/local/bin/apktool && chmod +x /usr/local/bin/apktool
 
